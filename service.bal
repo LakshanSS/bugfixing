@@ -9,8 +9,8 @@ service / on httpListener {
         log:printInfo("Service started successfully.");
     }
 
-    resource function get lakshans(@http:Header string api\-userId) returns string {
-        log:printInfo("received header: " + api\-userId);
-        return api\-userId + " " + api\-userId;
+    resource function get lakshans(@http:Header string apiuserId) returns string {
+        log:printInfo("received header: " + apiuserId);
+        return apiuserId + " " + apiuserId;
     }
 }
