@@ -15,7 +15,7 @@ service / on httpListener {
     }
 
     resource function get username() returns string {
-        return username + "is the username";
+        return username + "is the username"
     }
 
     resource function get customer() returns Person {
