@@ -2,6 +2,7 @@ import ballerina/log;
 import ballerina/http;
 
 configurable string authHeader =?;
+configurable decimal timeOut = 120;
 
 listener http:Listener httpListener = check new (7071);
 
@@ -17,8 +18,12 @@ service / on httpListener {
     }
 
     resource function get customer() returns http:Response|error {
-        http:Client cl = check new("https://esb-qa.sipr.ucl.ac.be:8243/learningUnits/v1/esb/2020");
-        log:printInfo("sending request");
+        http:ClientConfiguration clientConfig = {
+            httpVersion: http:HTTP_1_1,
+            timeout: timeOut
+        };
+        http:Client cl = check new("https://esb-qa.sipr.ucl.ac.be:8243/learningUnits/v1/esb/2020", clientConfig);
+        log:printInfo("sending request " + timeOut.toString());
         http:Response res = check cl->get("", {"Authorization": authHeader, "Accept": "application/json"});
         log:printInfo("received response");
         log:printInfo(res.statusCode.toString());
